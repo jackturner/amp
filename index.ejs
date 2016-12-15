@@ -1,5 +1,9 @@
+	<h1>Playlists</h1>
+
 	<ul>
 		<% for(var i = 0; i < rows.length; i++) { %>
-			<li><%= rows[i].name %></li>
+			<li><a href="<%= rows[i].url %>" target="_blank"><%= rows[i].name %></a></li>
 		<% } %>
 	</ul>
+
+	<a href="/new">Add a playlist</a>

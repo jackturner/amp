@@ -27,6 +27,21 @@ app.get('/', function (req, res) {
 
 })
 
+app.get('/search', function (req, res) {
+  res.send('gonna do a search for: ' + req.query.q);
+})
+
+app.get('/new', function (req, res) {
+  var compiled = ejs.compile(fs.readFileSync(__dirname + '/new.ejs', 'utf8'))
+  var html = compiled()
+  res.send(html)
+})
+
+app.post('/new', function (req, res) {
+  console.log(req.params)
+  res.redirect('/')
+})
+
 var server = app.listen(3000, function () {
   var host = server.address().address
   var port = server.address().port
