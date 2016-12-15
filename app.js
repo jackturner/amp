@@ -1,4 +1,5 @@
 var express = require('express'),
+    bodyParser = require('body-parser'),
     app = express(),
     mysql = require('mysql'),
     fs = require('fs'),
@@ -37,8 +38,18 @@ app.get('/new', function (req, res) {
   res.send(html)
 })
 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
 app.post('/new', function (req, res) {
-  console.log(req.params)
+  console.log(req.body.name, req.body.url)
+
+  var playlist  = {name: req.body.name, url: req.body.url}
+  var query = connection.query('INSERT INTO playlists SET ?', playlist, function(err, result) {
+
+  })
+  console.log(query.sql)
+
   res.redirect('/')
 })
 
